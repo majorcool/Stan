@@ -13,7 +13,7 @@ output=""
 Count2=0
 Count3=0
 Count5=0
-Count7=0
+CountSev=0
 TF=False
 while i<Num:
     PanDing=Num%i
@@ -48,8 +48,8 @@ if YesorNo==True:
     while(1):
         if Num%7==0:
             Num=Num/7
-            Count7+=1
+            CountSev+=1
         else:
             break
 if YesorNo==True:
-    print("分解公因式需要%d个2\n%d个3\n%d个5\n%d个7" % (Count2,Count3,Count5,Count7))
+    print("分解公因式需要%d个2\n%d个3\n%d个5\n%d个7" % (Count2,Count3,Count5,CountSev))
