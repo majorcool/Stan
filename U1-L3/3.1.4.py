@@ -10,3 +10,4 @@ while i<5:
         print("猜大了")
     else:
         print("猜小了")
+    i=i+1
