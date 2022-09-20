@@ -1,6 +1,6 @@
 i=1
 b=1
-Num=int(input("请输入正整数"))
+Num=int(input("请输入正整数,请勿输入质数"))
 PanDing=0
 Num1=Num
 print("%d=" % Num,end="")
