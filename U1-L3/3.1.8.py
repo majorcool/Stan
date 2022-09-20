@@ -3,7 +3,7 @@ even=0
 sum=0
 i=1
 PanDing=0
-while i<101:
+for i in range (1,101):
     sum=sum+i
     PanDing=i%2
     if PanDing==0:
