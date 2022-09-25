@@ -1,5 +1,5 @@
-def CFB(lieshu)
-    HangShu = 9
+def CFB(lieshu):
+    HangShu = lieshu
     for i in range(1, HangShu + 1):
         print("%d*%d=%d" % (1, i, i), end=" ")
         if i >= 2:
@@ -19,3 +19,4 @@ def CFB(lieshu)
         if i >= 9:
             print("%d*%d=%d" % (9, i, 9 * i), end=" ")
         print("")
+CFB(9)
