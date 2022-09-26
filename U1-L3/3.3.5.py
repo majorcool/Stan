@@ -28,4 +28,12 @@ for i in range(0,24):
     else:
         print(second)
 '''
-print("1234,1243,1324,1342,1423,1432,2134,2143,2341,2314,2413,2431,3124,3142,3241,3214,3412,3421,4123,4132,4231,4213,4321,4312")
+count=0
+for num1 in range(1,5):
+    for num2 in range (1,5):
+        for num3 in range(1,5):
+            if num1==num2 or num1==num3 or num2==num3:
+                continue
+            print(str(num1)+str(num2)+str(num3),end=' ')
+            count+=1
+print(',total:',count)
