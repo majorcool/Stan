@@ -12,5 +12,8 @@ while(1):
         Cheng=Num1*Num2
         print("%f" % Cheng)
     else:
+        if Num2==0:
+            print("除数不能为零")
+            continue
         Chu=Num1/Num2
         print("%f" % Chu)
