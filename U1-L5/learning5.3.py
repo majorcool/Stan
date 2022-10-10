@@ -2,7 +2,7 @@ xiaoming={
 "name":"小明",
 "age":18,
 "gender":True,
-"height":1.75
+"height":1.75#key必须是唯一的，只能用key访问value,不能用value访问key
 }#键必须是唯一的
 print(xiaoming)#字典输出时顺序是随机的
 #取值
