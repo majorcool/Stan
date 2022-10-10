@@ -11,7 +11,7 @@ def sum0(num_list):
                 if num_list[i]+num_list[o]+num_list[p]==0:
                     temp_list=(num_list[i],num_list[o],num_list[p])
                     temp_list2[i]=temp_list
-    print(set(temp_list2))
+    print(set(temp_list2))#转换成数组后自动去处重复项
 sum0([1,2,3,4,5,-1,-2,-3,-4,-5])
 
 
