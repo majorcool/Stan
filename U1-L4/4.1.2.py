@@ -1,16 +1,14 @@
-def load():
+def load(abc):
+    print(abc)
     print('-------------')
     print('-- loading --')
     print('-------------')
     print('\n')
 intro_1='hello world!'
-print("a")
-load()
+load("a")
 intro_2='coding makes me happy!'
-print("b")
-load()
+load("b")
 intro_3='i lied'
-print("c")
-load()
+load("c")
 
 
