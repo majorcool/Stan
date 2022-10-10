@@ -3,11 +3,9 @@ Map_line1=[" "," | "," "," | "," "]
 Map_line2=[" "," | "," "," | "," "]
 Map_line3=[" "," | "," "," | "," "]
 Repeat=[0,0,0,0,0,0,0,0,0]
-win_list=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+win_list=[[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 judgep1=[]
 judgep2=[]
-j1=set(judgep1)
-j2=set(judgep2)
 win=False
 def map():#打印每次的地图
     for i in range(0,5):
@@ -36,7 +34,7 @@ def p1():#玩家1下棋
 def p2():#玩家2下棋
     while 1:
         player2 = int(input("输入想要下棋的位置:(1-9)"))
-        if player2<1 or player2>9 or Repeat[[player2-1]==1]:
+        if player2<1 or player2>9 or Repeat[player2-1]==1:
             print("请重新输入")
         else:
             break
@@ -51,26 +49,44 @@ def p2():#玩家2下棋
 def judge1():#判断玩家1输赢
     for i in range(0,8):
         temp_list=j1.intersection(win_list[i])
-        if temp_list==win_list[i]:
-            print("P1wins")
-            win=True
-            break
+        if sorted(temp_list)==win_list[i]:
+            return True
 def judge2():#判断玩家2输赢
     for i in range(0,8):
-        temp_list=j2.intersection(win_list[i])
-        if temp_list==win_list[i]:
-            print("P2wins")
-            win=True
-            break
+        temp_list2=j2.intersection(win_list[i])
+        if sorted(temp_list2)==win_list[i]:
+            return True
 map()
+count=0
 while 1:
-    if win==True:
+    count+=1
+    j1 = set(judgep1)
+    j2 = set(judgep2)
+    if judge1()==True or judge2()==True:
         break
     p1()
+    j1 = set(judgep1)
     map()
     judge1()
+    if judge1()==True:
+        print("P1wins")
+        break
+    if judge2()==True:
+        print("P2wins")
+        break
     p2()
+    j2 = set(judgep2)
+    if judge1()==True:
+        print("P1wins")
+        break
+    if judge2()==True:
+        print("P2wins")
+        break
     map()
     judge2()
+    if count==8:
+        print("pingju")
+        break
+
 
 
