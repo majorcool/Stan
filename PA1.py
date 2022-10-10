@@ -1,7 +1,7 @@
 Pos=[1,2,3,4,5,6,7,8,9]
-Map_line1=[" "," | "," "," | "," "]
-Map_line2=[" "," | "," "," | "," "]
-Map_line3=[" "," | "," "," | "," "]
+Map_line1=["1"," | ","2"," | ","3"]
+Map_line2=["4"," | ","5"," | ","6"]
+Map_line3=["7"," | ","8"," | ","9"]
 Repeat=[0,0,0,0,0,0,0,0,0]
 win_list=[[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 judgep1=[]
@@ -18,7 +18,11 @@ def map():#打印每次的地图
         print(Map_line3[i],end="")
 def p1():#玩家1下棋
     while 1:
-        player1 = int(input("输入想要下棋的位置:(1-9)"))
+        player1_type =input("输入想要下棋的位置:(1-9)")
+        if player1_type!="1"and player1_type!="2"and player1_type!="3"and player1_type!="4"and player1_type!="5"and player1_type!="6"and player1_type!="7"and player1_type!="8"and player1_type!="9":
+            print("请输入数字!!!!")
+            continue
+        player1=int(player1_type)
         if player1<1 or player1>9 or Repeat[player1-1]==1:
             print("请重新输入")
         else:
@@ -33,7 +37,11 @@ def p1():#玩家1下棋
     Repeat[player1-1]=1
 def p2():#玩家2下棋
     while 1:
-        player2 = int(input("输入想要下棋的位置:(1-9)"))
+        player2_type = input("输入想要下棋的位置:(1-9)")
+        if player2_type != "1" and player2_type != "2" and player2_type != "3" and player2_type != "4" and player2_type != "5" and player2_type != "6" and player2_type != "7" and player2_type != "8" and player2_type != "9":
+            print("请输入数字!!!!")
+            continue
+        player2=int(player2_type)
         if player2<1 or player2>9 or Repeat[player2-1]==1:
             print("请重新输入")
         else:
@@ -57,13 +65,9 @@ def judge2():#判断玩家2输赢
         if sorted(temp_list2)==win_list[i]:
             return True
 map()
-count=0
 while 1:
-    count+=1
     j1 = set(judgep1)
     j2 = set(judgep2)
-    if judge1()==True or judge2()==True:
-        break
     p1()
     j1 = set(judgep1)
     map()
@@ -84,9 +88,7 @@ while 1:
         break
     map()
     judge2()
-    if count==8:
-        print("pingju")
-        break
+
 
 
 
