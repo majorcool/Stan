@@ -20,7 +20,7 @@ def p1():#玩家1下棋
     while 1:
         player1_type =input("输入想要下棋的位置:(1-9)")
         if player1_type!="1"and player1_type!="2"and player1_type!="3"and player1_type!="4"and player1_type!="5"and player1_type!="6"and player1_type!="7"and player1_type!="8"and player1_type!="9":
-            print("请输入数字!!!!")
+            print("请输入1-9之间的数字!!!!")
             continue
         player1=int(player1_type)
         if player1<1 or player1>9 or Repeat[player1-1]==1:
@@ -39,7 +39,7 @@ def p2():#玩家2下棋
     while 1:
         player2_type = input("输入想要下棋的位置:(1-9)")
         if player2_type != "1" and player2_type != "2" and player2_type != "3" and player2_type != "4" and player2_type != "5" and player2_type != "6" and player2_type != "7" and player2_type != "8" and player2_type != "9":
-            print("请输入数字!!!!")
+            print("请输入1-9之间数字!!!!")
             continue
         player2=int(player2_type)
         if player2<1 or player2>9 or Repeat[player2-1]==1:
