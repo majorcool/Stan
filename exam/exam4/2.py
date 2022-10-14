@@ -1,6 +1,7 @@
 def password(login_info):
     judge=False
     keys=''
+    count=0
     while 1:
         user=str(input("输入用户名:"))
         for key in login_info:
@@ -12,8 +13,8 @@ def password(login_info):
             break
         else:
             print("用户名错误")
-    new_password=str(input("输入新的密码:"))
     while 1:
+        new_password = str(input("输入新的密码:"))
         if len(new_password)<8:
             print("密码长度应该不少于8位")
         elif new_password.isdigit()==True:
@@ -21,18 +22,26 @@ def password(login_info):
         elif new_password.isalpha()==True:
             print("密码缺少数字")
         else:
-            print("重置成功")
-            if len(login_info[login_info.keys(keys)])==3:
-                login_info.keys(keys).pop
-                login_info.keys(ke
+            for pass_word in login_info[user]:
+                if new_password==pass_word:
+                    print("请设置未使用过的密码")
+                    continue
+                count+=1
+            if count<=2:
+                login_info[user].append(new_password)
+                print("已重置密码")
+                break
             else:
-            break
-    '''
-    if new_password in value:
-        print("请使用未使用过的密码")
-    return tuple(temp)
-    '''
+                login_info[user].pop()
+                login_info[user].append(new_password)
+                print("已重置密码")
+                break
+    temp_tuple=[user,]
+    for psw in login_info[user]:
+        temp_tuple.append(psw)
+    return tuple(temp_tuple)
+
 login_info={'user1':["abc"],
             'user2':["def","hjk","lmn"],
             }
-password(login_info)
+print(password(login_info))
