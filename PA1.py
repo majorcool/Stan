@@ -1,3 +1,5 @@
+import os
+import sys
 Pos=[1,2,3,4,5,6,7,8,9]
 Map_line1=["1"," | ","2"," | ","3"]
 Map_line2=["4"," | ","5"," | ","6"]
@@ -9,6 +11,8 @@ judgep2=[]
 listdel=[]
 count=0
 win=False
+def clear():
+    os.system('cls')
 def map():#打印每次的地图
     for i in range(0,5):
         print(Map_line1[i],end="")
@@ -129,6 +133,7 @@ while 1:
 
         j1 = set(judgep1)
         map()
+        clear()
         judge1()
         if judge1()==True:
             print("P1wins")
@@ -170,7 +175,7 @@ while 1:
                 if tempnum > 6 and tempnum <= 9:
                     Map_line3[(tempnum - 7) * 2] = str(tempnum)
             else:
-                judge1.pop(0)
+                judgep1.pop(0)
                 if tempnum >= 1 and tempnum <= 3:
                     Map_line1[(tempnum - 1) * 2] = str(tempnum)
                 if tempnum > 3 and tempnum <= 6:
@@ -185,6 +190,7 @@ while 1:
             print("P2wins")
             break
         map()
+        clear()
         judge2()
 
 
