@@ -91,6 +91,7 @@ while 1:
         j2 = set(judgep2)
         p1()
         count+=1
+        clear()
         if count==6:
             print(listdel[0],"号位置的棋子即将被删除")
         if count==7:
@@ -133,7 +134,6 @@ while 1:
 
         j1 = set(judgep1)
         map()
-        clear()
         judge1()
         if judge1()==True:
             print("P1wins")
@@ -143,6 +143,7 @@ while 1:
             break
         p2()
         count+=1
+        clear()
         if count==6:
             print(listdel[0],"号位置的棋子即将被删除")
         if count==7:
@@ -190,7 +191,6 @@ while 1:
             print("P2wins")
             break
         map()
-        clear()
         judge2()
 
 
