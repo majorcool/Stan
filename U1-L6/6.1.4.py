@@ -10,3 +10,6 @@ def delete(one,two):
             count+=1
     print(one)
 delete("abssjhsadhasdbasd","abss")
+#可以用translate 和 maketrans
+#trantab=maketrans(two,"")
+#one.translate(trantab)
