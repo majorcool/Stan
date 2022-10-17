@@ -9,3 +9,4 @@ def reverse(str_):
             temp.append(Alphabet[-(Alphabet.find(i)+1)])
     print(temp)
 reverse("abc")
+#这里也可以用translate 和 maketrans的方法
