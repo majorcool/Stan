@@ -10,6 +10,7 @@ judgep1=[]
 judgep2=[]
 listdel=[]
 count=0
+count1=0
 win=False
 def clear():
     os.system('cls')
@@ -86,11 +87,13 @@ while 1:
     listdel = []
     count = 0
     win = False
+    count1=0
     while 1:
         j1 = set(judgep1)
         j2 = set(judgep2)
         p1()
         count+=1
+        count1+=1
         clear()
         if count==6:
             print(listdel[0],"号位置的棋子即将被删除")
@@ -143,6 +146,7 @@ while 1:
             break
         p2()
         count+=1
+        count1+=1
         clear()
         if count==6:
             print(listdel[0],"号位置的棋子即将被删除")
@@ -169,19 +173,19 @@ while 1:
             print(listdel[0],"号位置的棋子即将被删除")
             if count%2==0:
                 judgep2.pop(0)
-                if tempnum >= 1 and tempnum <= 3:
+                if tempnum >= 1 and tempnum <= 3 and judge1()==False and judge2()==False:
                     Map_line1[(tempnum - 1) * 2] = str(tempnum)
-                if tempnum > 3 and tempnum <= 6:
+                if tempnum > 3 and tempnum <= 6 and judge1()==False and judge2()==False:
                     Map_line2[(tempnum - 4) * 2] = str(tempnum)
-                if tempnum > 6 and tempnum <= 9:
+                if tempnum > 6 and tempnum <= 9 and judge1()==False and judge2()==False:
                     Map_line3[(tempnum - 7) * 2] = str(tempnum)
             else:
                 judgep1.pop(0)
-                if tempnum >= 1 and tempnum <= 3:
+                if tempnum >= 1 and tempnum <= 3 and judge1()==False and judge2()==False:
                     Map_line1[(tempnum - 1) * 2] = str(tempnum)
-                if tempnum > 3 and tempnum <= 6:
+                if tempnum > 3 and tempnum <= 6 and judge1()==False and judge2()==False:
                     Map_line2[(tempnum - 4) * 2] = str(tempnum)
-                if tempnum > 6 and tempnum <= 9:
+                if tempnum > 6 and tempnum <= 9 and judge1()==False and judge2()==False:
                     Map_line3[(tempnum - 7) * 2] = str(tempnum)
         j2 = set(judgep2)
         if judge1()==True:
