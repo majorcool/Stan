@@ -16,4 +16,4 @@ def findlist(num):
         div=num//(26**i)
         num=num-div*(26**i)
     print(temp_str)
-findlist(26)
+findlist(1)
