@@ -16,6 +16,5 @@ def hahanum(n):
     if sum==1:
         print("是蛤蛤数")
         return True
-
     return hahanum(sum)
 hahanum(19)
