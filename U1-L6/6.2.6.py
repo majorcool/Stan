@@ -3,6 +3,9 @@ def findlist(num):
     temp_str=''
     alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     while 1:
+        if num<=26:
+            print(alphabet[num-1])
+            return False
         if num//26**count>1:
             count+=1
         else:break
@@ -13,4 +16,4 @@ def findlist(num):
         div=num//(26**i)
         num=num-div*(26**i)
     print(temp_str)
-findlist(2147483647)
+findlist(26)
