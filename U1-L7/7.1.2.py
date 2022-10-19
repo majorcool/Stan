@@ -1,6 +1,6 @@
 '''def count():
     count+=1
-    怎么限制递归次数啊啊啊啊
+    怎么限制递归次数啊啊啊
 '''
 def hahanum(n):
     n=str(n)
