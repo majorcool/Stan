@@ -6,6 +6,9 @@ def findlist(num):
         if num//26**count>1:
             count+=1
         else:break
+    if num<=26:
+        print(alphabet[num-1])
+        return False
     if count>1:
         count-=1
     for i in range (count,-1,-1):
@@ -13,4 +16,4 @@ def findlist(num):
         div=num//(26**i)
         num=num-div*(26**i)
     print(temp_str)
-findlist(27)
+findlist(2147483647)
