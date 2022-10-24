@@ -31,5 +31,9 @@ card_list=[
     {"name":"里斯","qq":"12345"
      }
 ]
-for card_info in card_list:
+xiaoming={
+    "name":"小明",
+    "age":12
+}
+for card_info in xiaoming:
     print(card_info)
