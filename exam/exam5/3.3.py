@@ -4,4 +4,4 @@ def Nim(n):
     else:
         return False
 
-print(Nim(7))
+print(Nim(8))
