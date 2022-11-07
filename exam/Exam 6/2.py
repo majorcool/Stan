@@ -1,4 +1,4 @@
-def reverse_vowels(s):
+'''def reverse_vowels(s):
     change=['a','e','i','o','u','A','E','I','O','U']
     temp=[]
     for char in s:
@@ -22,3 +22,18 @@ def reverse_vowels(s):
     for char in s:
         print(char,end='')
 reverse_vowels('CoopEdu2022')
+'''
+def reverse_vowels(s):
+    vowels=[]
+    for char in s:
+        if char in 'aeiouAEIOU':
+            vowels.append(char)
+    reverse=''
+    for i in range(len(s)):
+        if s[i] in vowels:
+            reverse+=vowels.pop()
+        else:
+            reverse+=s[i]
+    return reverse
+print(reverse_vowels('CoopEdu2022'))
+

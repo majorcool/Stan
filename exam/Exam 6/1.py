@@ -12,7 +12,6 @@ def is_power_of_3_v2(n):
     temp=3
     for i in range(0,32):
         temp=3**i
-
         if n==temp:
             return True
     return False
