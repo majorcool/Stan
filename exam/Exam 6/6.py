@@ -10,6 +10,5 @@ class Easymath:
         self.num1=num1
         self.num2=num2
         return num1-num2
-User=0
 User=Easymath('II',2)
 print(User.easy_add(8,7))
