@@ -5,8 +5,8 @@ def reverse_vowels(s):
         if char in change:
             temp.append(char)
     temp.reverse()
-    s='_'.join(s)
-    s=s.split('_')
+    s='_djiwedhiuedhiwehd%^*%0129dj'.join(s)
+    s=s.split('_djiwedhiuedhiwehd%^*%0129dj')
     count=-1
     count2=0
     temp2=temp
