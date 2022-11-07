@@ -30,7 +30,7 @@ def reverse_vowels(s):
             vowels.append(char)
     reverse=''
     for i in range(len(s)):
-        if s[i] in vowels:
+        if s[i] in 'aeiouAEIOU':
             reverse+=vowels.pop()
         else:
             reverse+=s[i]
