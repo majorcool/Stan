@@ -2,7 +2,9 @@
     count+=1
     怎么限制递归次数啊啊啊
 '''
+a=0
 def hahanum(n):
+    global a
     n=str(n)
     temp=[]
     sum=0
@@ -16,5 +18,9 @@ def hahanum(n):
     if sum==1:
         print("是蛤蛤数")
         return True
+    if a==994:
+        print("不是哈哈数")
+        return False
+    a+=1
     return hahanum(sum)
-hahanum(19)
+hahanum(20)
