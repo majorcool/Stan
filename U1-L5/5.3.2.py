@@ -10,5 +10,5 @@ for k in dict:
 for k in dict:
     print(dict[k])
 #遍历key和value
-for k in dict:
-    print(k,":",dict[k])
+for k,v in dict.items():
+    print(k,v)

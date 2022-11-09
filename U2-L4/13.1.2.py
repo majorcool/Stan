@@ -6,7 +6,7 @@ class Exam:
         self.id=8
 class Test(Exam):
     def __init__(self):
-        super().__init__()
+        super() .__init__()
         self.points=10
         print(self.points)
         print(self.id)
