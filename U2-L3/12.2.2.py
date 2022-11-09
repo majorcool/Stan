@@ -7,8 +7,11 @@ class A:
 
 class B(A):
     def f2(self):
-        # write code here
+        print(self._A__u)
         pass
     def f3(self):
-        # write code here
+        self._A__f1()
         pass
+test=B()
+test.f3()
+test.f2()
