@@ -10,6 +10,7 @@ class User:
 class Vip(User):
     def __init__(self):
         self.vip_level=1
+        super(Vip, self).__init__()
         print("您已成为VIP")
 a=User()
 a.upgrade_to_vip()
