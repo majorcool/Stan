@@ -1,4 +1,6 @@
+import string
 def sort(str_):
+    punc = string.punctuation
     space=0
     abc=0
     num=0
@@ -10,8 +12,8 @@ def sort(str_):
             space+=1
         if str_[i].isdigit()==True:
             num+=1
-        if str_[i].isidentifier()==True:
+        if str_[i] in punc:
             extra+=1
     temp=("字母:",abc,"空格:",space,"数字:",num,"其他字符:",extra)
     return temp
-print(sort("asd67sg,,  ashdn"))
+print(sort("asd67sg,, ashdn"))
