@@ -1,7 +1,8 @@
 class People:
-    def __talk(self):
+    def talk(self):
         print('Ahhhh')
 class infant(People):
-    pass
+    def talk(self):
+        print("无法调用")
 XM=infant()
-#XM.talk() 报错
+XM.talk()
