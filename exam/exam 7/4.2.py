@@ -26,8 +26,11 @@ class Trainer(Manager):
 def everyday():
     keeper=Keeper()
     trainer=Trainer()
-    keeper.perform()
-    keeper
+    keeper.feed()
+    trainer.perform()
+    manager=Manager()
+    manager._Manager__inspect(keeper)
+    manager._Manager__inspect(trainer)
 
 
 
