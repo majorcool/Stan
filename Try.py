@@ -1,8 +1,5 @@
-class Circle():
-    def __init__(self,r):
-        self.r=r
-        self.__pi=3.14159265
-    def area(self):
-        print(self.__pi,self.r)
-circle=Circle(3)
-circle.area()
+DEL=[1,2,3,4,4]
+fish=[1,4,2,4,8,9,9,8,67,3]
+for i in DEL:
+    fish.pop(fish.index(i))
+print(fish)
