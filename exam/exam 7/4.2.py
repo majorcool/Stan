@@ -2,8 +2,9 @@ class Animal():
     def __init__(self):
         self.health=100
 class Manager(Animal):
-    def perform(self):
-        self.health-=20
+    def perform(self,animals):
+        for animal in animals:
+            animal.health=min(animal.health+20,100)
     def __inspect(self,worker):
         self.worker=worker
         self.worker.performance=100
