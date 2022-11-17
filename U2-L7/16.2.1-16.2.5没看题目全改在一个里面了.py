@@ -38,23 +38,23 @@ p1=Player()
 host=Dealer()
 rule=Rule()
 def game():
+    p1.guess_number()
+    low=0
+    high=100
     while p1.points>=-10:
-        p1.guess_number()
-        low=0
-        high=100
-        while p1.points>=-10:
-            host.set_number()
-            host.hint(p1.guess_num)
-            if p1.guess_num==host.win_number:
-                #rule.judge(p1.points)
-                p1.points+=host.award(rule.rounds)
-                break
-            if host.hint(p1.guess_num)==-1:
-                low=p1.guess_num
-                p1.guess_number(p1.guess_num,high)
-            else:
-                high=p1.guess_num
-                p1.guess_number(low,p1.guess_num)
-            rule.rounds+=1
-        print(p1.points)
-game()
+        host.set_number()
+        host.hint(p1.guess_num)
+        if p1.guess_num==host.win_number:
+            #rule.judge(p1.points)
+            p1.points+=host.award(rule.rounds)
+            break
+        if host.hint(p1.guess_num)==-1:
+            low=p1.guess_num
+            p1.guess_number(p1.guess_num,high)
+        else:
+            high=p1.guess_num
+            p1.guess_number(low,p1.guess_num)
+        rule.rounds+=1
+    print(p1.points)
+while p1.points>=-10:
+    game()
