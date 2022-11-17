@@ -16,6 +16,10 @@ class Queue:
         return self.entries[0]
     def print(self):
         print(self.entries)
+        #找到max
+        #找到min
+    def max(self):
+        for i in
 l=Queue()
 l.enqueue('u')
 l.enqueue(12)

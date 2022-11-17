@@ -36,10 +36,10 @@ host=Dealer()
 rule=Rule()
 def game(host,player):
     player.guess_number()
+    host.set_number()
     low=0
     high=100
     while player.points>=-10:
-        host.set_number()
         host.hint(player.guess_num)
         if player.guess_num==host.win_number:
             rule.judge(rule.rounds,player)
