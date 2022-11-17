@@ -15,9 +15,8 @@ class Dealer:
         else:
             print("猜对了")
             return 0
-    def award(self,rounds):
-        self.Awards=10-rounds
-        return self.Awards
+    def award(self,rounds,player):
+        player.points=10-rounds
 class Player(Dealer):
     def __init__(self):
         super().__init__()
@@ -30,31 +29,28 @@ class Rule(Player,Dealer):
     def __init__(self):
         super().__init__()
         self.rounds=0
-    def judge(self,user):
-        self.points=user
-        self.points+=super().award(self.rounds)
-
+    def judge(self,rounds,player):
+        player.points+=10-rounds
 p1=Player()
 host=Dealer()
 rule=Rule()
-def game():
-    p1.guess_number()
+def game(host,player):
+    player.guess_number()
     low=0
     high=100
-    while p1.points>=-10:
+    while player.points>=-10:
         host.set_number()
-        host.hint(p1.guess_num)
-        if p1.guess_num==host.win_number:
-            #rule.judge(p1.points)
-            p1.points+=host.award(rule.rounds)
+        host.hint(player.guess_num)
+        if player.guess_num==host.win_number:
+            rule.judge(rule.rounds,player)
             break
-        if host.hint(p1.guess_num)==-1:
-            low=p1.guess_num
-            p1.guess_number(p1.guess_num,high)
+        if host.hint(player.guess_num)==-1:
+            low=player.guess_num
+            player.guess_number(player.guess_num,high)
         else:
-            high=p1.guess_num
-            p1.guess_number(low,p1.guess_num)
+            high=player.guess_num
+            player.guess_number(low,player.guess_num)
         rule.rounds+=1
     print(p1.points)
 while p1.points>=-10:
-    game()
+    game(host,p1)
