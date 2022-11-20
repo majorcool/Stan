@@ -1,10 +1,14 @@
 import random
 class Citizen:
+    def __init__(self):
+        self.id='citizen'
     def vote(self):
         return random.randint(0,len(players)-1)
     def select(self):
         return 'citizen'
 class Mafia:
+    def __init__(self):
+        self.id='mafia'
     def kill(self):
         return random.randint(0,len(players)-1)
     def vote(self):
@@ -12,16 +16,26 @@ class Mafia:
     def select(self):
         return 'mafia'
 class Judge:
+    def __init__(self):
+        self.id='judge'
     def vote(self):
         return random.randint(0,len(players)-1)
     def select(self):
         return 'judge'
+class Cop(Citizen):
+    def __init__(self):
+        self.id='cop'
+    def ask(self,player):
+        return player.id
+    def select(self):
+        return 'cop'
 players=[]
 for i in range(6):
     players.append(Citizen())
 for i in range(3):
     players.append(Mafia())
 players.append(Judge())
+players.append(Cop())
 def game(players):
     while 1:
         select=[]
@@ -60,6 +74,23 @@ def game(players):
         elif mafia_live==False:
             print("Good Wins")
             break
+        cop_is_alive=False
+        judge_is_alive=False
+        for player in players:
+            if player.select()=='cop':
+                cop_is_alive=True
+            if player.select()=='judge':
+                judge_is_alive=True
+        if cop_is_alive==True and judge_is_alive==True:
+            for player in players:
+                if player.select() == 'cop':
+                    player_id=random.randint(0,len(players)-1)
+                    Identity=player.ask(players[player_id])
+                    print("警官询问了Judge并得知了 %s 的身份是 %s" % (player_id,Identity))
+                    if Identity=='mafia':
+                        print("Cop killed mafia")
+                        players.pop()
+
         print("开始讨论")
         for player in players:
             vote.append(player.vote())
