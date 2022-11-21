@@ -8,4 +8,4 @@ def largest_perimeter(nums):
             print(x,y,z)
             return nums[x]+nums[y]+nums[z]
     return 0
-print(largest_perimeter([1,2,2,4,2]))
+print(largest_perimeter([0,2,2,4,54]))
