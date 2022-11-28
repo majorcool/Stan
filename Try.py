@@ -1,6 +1,18 @@
-nums = [1, 2, 3, 4, 5]
+def demo1():
+    try:
+        return int(input("input an integer: "))
+    except ValueError:
+        print("not an integer --- demo1")
 
-for n in nums:
-    n = n + 1 if n % 2 == 0 else n - 1
 
-print(nums)
+def demo2():
+    try:
+        return demo1()
+    except ValueError:
+        print("not an integer --- demo2")
+
+
+try:
+    print('user input:', demo2())
+except ValueError:
+    print("not an integer")
