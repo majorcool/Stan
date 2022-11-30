@@ -1,0 +1,1 @@
+This PEP contains the index of all Python Enhancement Proposals, known as PEPs. PEP numbers are assigned by the PEP editors, and once assigned are never changed. The version control history of the PEP texts represent their historical record. The PEPs are indexed by topic for specialist subjects.
