@@ -11,8 +11,10 @@ def plant(pos,n):
             continue_0=0
     if pos[0]==0 and pos[1]==0:
         n-=1
+    if pos[-1]==0 and pos[-2]==0:
+        n-=1
     if can_plant>=n:
         return True
     else:
         return False
-print(plant([0,0,1,0],n=1))
+print(plant([0,0,1,0,0],n=1))
