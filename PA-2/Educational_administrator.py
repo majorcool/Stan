@@ -1,13 +1,5 @@
-class Educational_administrator:
-    def Check_acc(self):
-        pass
-    def Create_acc(self):
-        pass
-    def Set(self):
-        pass
-    def Create_cls(self):
-        pass
-    def Change_cls(self):
-        pass
-    def Check_stu_cls(self):
-        pass
+import control_system
+class Educational_administrator(control_system.System):
+    def __init__(self,Username,Password):
+        self.Username=Username
+        self.psw=Password
