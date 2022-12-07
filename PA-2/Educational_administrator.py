@@ -1,5 +1,7 @@
-import control_system
-class Educational_administrator(control_system.System):
+class E_A:
     def __init__(self,Username,Password):
-        self.Username=Username
-        self.psw=Password
+        self.UserName=Username
+        self.PassWord=Password
+        self.UserType='EA'
+    def Login_(self):
+        return self.UserName, self.PassWord
