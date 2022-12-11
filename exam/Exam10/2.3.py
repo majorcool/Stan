@@ -17,4 +17,4 @@ def plant(pos,n):
         return True
     else:
         return False
-print(plant([0,0,1,0,0],n=1))
+print(plant([0,0,1,0,0],n=2))

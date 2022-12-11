@@ -8,10 +8,8 @@ class System:
     Student_score_needed=int()
     Student_acc={}
     Student_user=[]
-    def __init__(self,User):
-        self.UserName=self.Login_()[0]
-        self.PassWord=self.Login_()[1]
-        self.User=User
+    def __init__(self):
+        pass
 
     def Check_score(self): #Student
         if System.UserType=='Student':
@@ -68,27 +66,44 @@ class System:
     def Create_acc(self): #EA
         if System.UserType=="EA":
             acc_name=input("输入账号名字")
-            if acc_name in System.Student_pick_cls.keys():
+            self.ACC_Username=[]
+            for index,items in enumerate(self.Stu_account):
+                if index%2==0:
+                    self.ACC_Username.append(items)
+            if acc_name in self.ACC_Username:
                 print("此账号已存在")
                 return False
-            acc_user_name=acc_name
+            file=open('Student accounts',mode='a')
+            file.write(acc_name+'\n')
+            self.Stu_account.append(acc_name)
             acc_psw=input("请输入账号密码")
-            acc_name=SandT.Student()
-            acc_name.UserName=acc_user_name
-            acc_name.PassWord=acc_psw
-            System.Student_acc[acc_user_name]=acc_psw
-            System.Student_user.append(acc_user_name)
+            file.write(acc_psw+'\n')
+            self.Stu_account.append(acc_psw)
+            file.close()
         else:
             print("您不是教务或者未登录")
             return False
     def Set(self): #EA
         if System.UserType=="EA":
-            System.Student_score_needed=int(input("请输入学生需要的学分,原先学分为%d" % System.Student_score_needed))
+            file=open('Student_score_needed', mode='r')
+            student_score=file.readline()
+            student_score=student_score.rstrip()
+            System.Student_score_needed=input("请输入学生需要的学分,原先学分为%s" % student_score)
+            file.close()
+            file=open('Student_score_needed',mode="w+")
+            file.write(System.Student_score_needed)
+            file.close()
+            print("修改成功")
         else:
             print("您不是教务或者未登录")
             return False
     def Create_cls(self): #EA
         if System.UserType=="EA":
+            file=open("Classes available",mode="r+")
+            temp=file.readlines()
+            for items in temp:
+                if items[0]=='N'and items[1]=="a" and items[2]=='m' and items[3]=="e":
+                    if
             self.cls_name=input("输入课程名")
             self.app_cls_name=self.cls_name
             self.cls_teacher=str(input("输入老师名字"))
@@ -107,6 +122,7 @@ class System:
         if System.UserType=="EA":
             self.change_cls_inf_name=input("请输入想要修改信息的课程的名称")
             if self.change_cls_inf_name in System.Class_able.keys():
+
                 self.change_cls_inf=input("请输入你想修改的课程的信息(1-5),如果想修改多个就请输入多个数字，比如12\n1:课程名称\n2:课程老师名字\n3:课程学分\n4:课程是否为必修\n5:课程剩余容量")
                 if '1' in self.change_cls_inf:
                     print("课程原名称为%s" % System.Class_able[self.change_cls_inf_name].name)
@@ -144,32 +160,34 @@ class System:
             print("您不是教务或者未登录")
             return False
     def Login(self): #EA,Student
-        get_username=input('请输入%s的用户名?' % self.UserName)
-        if self.UserType=='Student':
-            if get_username not in System.Student_acc.keys():
-                print("无此用户")
-                return False
-            else:
-                get_pwd=input("输入密码?")
-                if get_pwd!= System.Student_acc[get_username]:
-                    print("密码错误")
-                    return False
-                else:
-                    System.UserType=self.UserType
-                    print("登陆成功,您是%s"%System.UserType)
-                    if System.UserType == "Student" and self.UserName not in System.Student_pick_cls.keys():
-                        System.Student_pick_cls[self.UserName] = []
-        if self.UserType=="EA":
-            if get_username==self.UserName:
-                get_pwd=input("输入密码")
-                if get_pwd!= self.PassWord:
-                    print("密码错误")
-                    return False
-                else:
-                    print("登陆成功,您是EA")
-                    System.UserType=self.UserType
-            else:
-                print("无此用户")
+        file1=open('EA Account.txt', mode='r')
+        file2=open('Student accounts',mode='r')
+        self.EA_account=[]
+        self.Stu_account=[]
+        length_file=file1.readlines()
+        for items in length_file:
+            self.EA_account.append(items.rstrip())
+        length_file=file2.readlines()
+        for items in length_file:
+            self.Stu_account.append(items.rstrip())
+        file1.close()
+        file2.close()
+        get_username=input('请输入用户名?')
+        get_psw=input("输入密码")
+        for i in range(len(self.EA_account)-1):
+            if self.EA_account[i]==get_username and self.EA_account[i+1]==get_psw:
+                print('登陆成功')
+                System.UserType='EA'
+                return True
+        for i in range(len(self.Stu_account)-1):
+            if self.Stu_account[i]==get_username and self.Stu_account[i+1]==get_psw:
+                print('登陆成功')
+                System.UserType='Stu'
+                return True
+        print("登陆失败")
+        return False
+
+
     def Log_out(self):
         if System.UserType=='':
             print("未登录")
@@ -190,6 +208,10 @@ class System:
         else:
             print("请先登录")
             return False
+system=System()
+system.Login()
+system.Set()
+'''
 EA=Educational_administrator.E_A("EA","123")
 Student=SandT.Student()
 System.Login(EA)
@@ -203,6 +225,7 @@ System.Quit_cls(System.Student_user[0])
 System.Log_out(System.Student_user[0])
 System.Login(EA)
 System.Check_stu_cls(EA)
+'''
 '''
 System.Create_cls(EA)
 System.Change_cls(EA)
