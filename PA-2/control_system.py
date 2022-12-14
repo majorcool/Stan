@@ -382,31 +382,3 @@ try:
 except BaseException:
     Error=Exception('傻子用户又乱搞')
     raise Error
-
-'''
-EA=Educational_administrator.E_A("EA","123")
-Student=SandT.Student()
-System.Login(EA)
-System.Set(EA)
-System.Create_acc(EA)
-System.Create_cls(EA)
-System.Log_out(EA)
-System.Login(System.Student_user[0])
-System.Pick_cls(System.Student_user[0])
-System.Quit_cls(System.Student_user[0])
-System.Log_out(System.Student_user[0])
-System.Login(EA)
-System.Check_stu_cls(EA)
-'''
-'''
-System.Create_cls(EA)
-System.Change_cls(EA)
-System.Check_cls(EA)
-System.Log_out(EA)
-Stu1=SandT.Student("Stu1","123")
-System.Login(Stu1)
-System.Pick_cls(Stu1)
-System.Log_out(Stu1)
-System.Login(EA)
-System.Check_stu_cls(EA)
-'''
