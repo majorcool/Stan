@@ -338,8 +338,47 @@ class System:
             return False
 try:
     system=System()
-    system.Login()
-    system.Quit_cls()
+    while 1:
+        a=input("选择你要进行的操作(输入数字序号),第一步请先登录\n"
+                "1.查看学分要求(学生)\n"
+                "2.选课(学生)\n"
+                "3.退课(学生)\n"
+                "4.查看账号(教务)\n"
+                "5.创建账号(教务)\n"
+                "6.设置学分要求(教务)\n"
+                "7.创建课程(教务)\n"
+                "8.更改课程信息(教务)\n"
+                "9.查看学生选课情况(教务)\n"
+                "10.登录\n"
+                "11.登出\n"
+                "12.查看课程信息(学生+教务)\n"
+                "13.退出程序")
+        if a=='1':
+            system.Check_score()
+        if a=="2":
+            system.Pick_cls()
+        if a=="3":
+            system.Quit_cls()
+        if a=="4":
+            system.Check_acc()
+        if a=="5":
+            system.Create_acc()
+        if a=="6":
+            system.Set()
+        if a=="7":
+            system.Create_cls()
+        if a=="8":
+            system.Change_cls()
+        if a=="9":
+            system.Check_stu_cls()
+        if a=="10":
+            system.Login()
+        if a=="11":
+            system.Log_out()
+        if a=="12":
+            system.Check_cls()
+        if a=="13":
+            break
 except BaseException:
     Error=Exception('傻子用户又乱搞')
     raise Error
