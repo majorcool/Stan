@@ -9,78 +9,127 @@ class System:
     Student_acc={}
     Student_user=[]
     UserName=''
-    def __init__(self):
-        pass
-
     def Check_score(self): #Student
-        if System.UserType=='Student':
-            return "您的学分为%s" % self.learn_score
+        if System.UserType=='Stu':
+            file=open('Student_score_needed')
+            temp=file.readline().rstrip()
+            print("学生需要",temp,"学分")
         else:
             print("您不是学生或者未登录")
             return False
     def Pick_cls(self): #Student
-        if System.UserType=='Student':
+        if System.UserType=='Stu':
             file=open('Classes available',mode='r')
             temp=file.readlines()
             temp2=[]#用来查询存在的课程
             for items in temp:
                 if items[:4:]=="Name":
-                    temp2.append(items)
+                    temp2.append(items[5::].rstrip())
             file.close()
             file2=open('Student_choosed_cls',mode="r")
             temp3=file2.readlines()
             temp4=[]#用来储存已经选择的课程
-            for items in temp:
+            for items in temp3:
                 if items[:items.find(" ")]==System.UserName:
                     temp4.append(items[items.find(" ")+1:])
             file2.close()
             Cls_picked=input('输入想要选择的课程的名字')
             file3=open('Classes available',mode="r")
             temp5=file3.readlines()
-            Storage_left_cls=0
             for items in temp5:
-                if items[:4:]=="Name" and items[5::]==Cls_picked:
-                    Storage_left_cls=int(temp5[temp5.index(items)][5::].rstrip())
+                if items[:4:]=="Name" and items[5::].rstrip()==Cls_picked:
+                    Storage_left_cls=int(temp5[temp5.index(items)+4][5::].rstrip())
             if Cls_picked not in temp2:
                 print("暂无此课程")
                 return False
             elif Cls_picked in temp4:
                 print("已选择此课程")
                 return False
-            elif Storage_left_cls==0:
+            elif Storage_left_cls=='0':
                 print("该课程已满员")
                 return False
             else:
-                System.Student_pick_cls[self.UserName].append(Cls_picked)
+                file4=open('Student_choosed_cls',mode='r')
+                temp6=file4.readlines()
+                temp6.append(System.UserName+" "+Cls_picked+'\n')
+                file4.close()
+                file4=open("Student_choosed_cls",mode="w")
+                for items in temp6:
+                    file4.write(items)
+                file4.close()
+                file5=open('Classes available',mode='r')
+                temp7=file5.readlines()
+                for items in temp7:
+                    if items[:4:]=="Name" and items[5::].rstrip()==Cls_picked:
+                        temp7[temp7.index(items)+4]='Stor '+str(Storage_left_cls-1)+'\n'
+                file5.close()
+                file5=open('Classes available',mode='w')
+                for items in temp7:
+                    file5.write(items)
+                file5.close()
                 print("已成功报名%s课程" % Cls_picked)
         else:
             print("您不是学生或者未登录")
     def Quit_cls(self): #Student
-        if System.UserType=='Student':
+        if System.UserType=='Stu':
             select_quit_cls=input("输入你想退课的课程名称")
-            if select_quit_cls not in System.Student_pick_cls[self.UserName]:
+            file=open('Student_choosed_cls')
+            temp=file.readlines()
+            temp2=[]
+            for items in temp:
+                if items[:items.find(" "):]==System.UserName:
+                    temp2.append(items[items.find(" ")+1::].rstrip())
+            if select_quit_cls not in temp2:
                 print("您没有报这一门课")
                 return False
             else:
                 submit_quit_cls=input("您确认要退课吗,请输入'确认'")
                 if submit_quit_cls=="确认":
-                    print(self.UserName)
-                    System.Student_pick_cls[self.UserName].pop(System.Student_pick_cls[self.UserName].index(select_quit_cls))
-                    print(System.Student_pick_cls)
-                    print("退课成功")   #这边缺一个课程名额+1
+                    for items in temp:
+                        if items[:items.find(" "):]==System.UserName and items[items.find(" ")+1::].rstrip()==select_quit_cls:
+                            temp.pop(temp.index(items))
+
+                    file.close()
+                    file=open("Student_choosed_cls",mode='w')
+                    for items in temp:
+                       file.write(items)
+                    file.close()
+                    file2=open("Classes available")
+                    temp3=file2.readlines()
+                    for items in temp3:
+                        if items[:4:]=='Name' and items[5::].rstrip()==select_quit_cls:
+                            Storage=int(temp3[temp3.index(items)+4][5::].rstrip())
+                            temp3[temp3.index(items)+4]='Stor '+str(Storage+1)+'\n'
+                    file2.close()
+                    file2=open("Classes available",mode="w")
+                    for items in temp3:
+                        file2.write(items)
+                    file2.close()
+                    print("退课成功")
                 else:
                     print("退课失败")
         else:
             print("您不是学生或者未登录")
     def Check_acc(self): #EA
         if System.UserType=="EA":
+            file=open("Student accounts",mode="r")
+            temp=file.readlines()
+            temp2=[]
+            count_i=0
+            for items in temp:
+                if count_i%2==0:
+                    temp2.append(items.rstrip())
+                count_i+=1
+            print("目前存在的学生账号",temp2)
             check_acc_name=input("输入你想查询的账号名:")
-            if check_acc_name not in System.Student_acc.keys():
+            if check_acc_name not in temp2:
                 print("没查询到此账号")
                 return False
             else:
                 print("账号用户名:%s" % check_acc_name)
-                print("账号密码:%s" % System.Student_acc[check_acc_name])
+                for items in temp:
+                    if items.rstrip()==check_acc_name:
+                        print("账号密码:%s" % temp[temp.index(items)+1])
         else:
             print("您不是教务或者未登录")
             return False
@@ -211,8 +260,17 @@ class System:
     def Check_stu_cls(self): #EA
         if System.UserType=="EA":
             self.search_student_cls_name=input("请输入想要查询所选课程的学生的名字:")
-            if self.search_student_cls_name in System.Student_pick_cls.keys():
-                print("该学生选了",System.Student_pick_cls[self.search_student_cls_name],'课程')
+            file=open('Student_choosed_cls',mode='r')
+            temp=file.readlines()
+            temp2=[]
+            for items in temp:
+                temp2.append(items[:items.find(' '):])
+            if self.search_student_cls_name in temp2:
+                print("该学生选择了:")
+                for items in temp:
+                    if items[:items.find(" "):]==self.search_student_cls_name:
+                        print(items[items.find(" ")+1::].rstrip())
+                file.close()
             else:
                 print("未查询到此学生")
                 return False
@@ -281,9 +339,9 @@ class System:
 try:
     system=System()
     system.Login()
-    system.Change_cls()
-except:
-    Error=Exception("傻子用户又乱搞")
+    system.Quit_cls()
+except BaseException:
+    Error=Exception('傻子用户又乱搞')
     raise Error
 
 '''
