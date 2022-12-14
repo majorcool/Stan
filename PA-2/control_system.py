@@ -101,20 +101,18 @@ class System:
         if System.UserType=="EA":
             file=open("Classes available",mode="r+")
             temp=file.readlines()
-            for items in temp:
-                if items[0]=='N'and items[1]=="a" and items[2]=='m' and items[3]=="e":
-                    if
             self.cls_name=input("输入课程名")
-            self.app_cls_name=self.cls_name
+            for items in temp:
+                if items[:4:]=='Name':
+                    if items[5::].rstrip()==self.cls_name:
+                        print("已有此课程")
+                        return False
             self.cls_teacher=str(input("输入老师名字"))
             self.cls_score=int(input("输入课程学分"))
             self.cls_must=bool(input("输入True或False,课程是否是必选?"))
             self.cls_storage=int(input("输入课程容量"))
-            if self.cls_name in System.Class_able:
-                print("已有此课程")
-                return False
-            self.cls_name=Courses.Class(self.cls_name,self.cls_teacher,self.cls_score,self.cls_must,self.cls_storage)
-            System.Class_able[self.app_cls_name]=self.cls_name
+            file.write('Name '+self.cls_name+'\n'+'Teac '+self.cls_teacher+'\n'+"Scor "+str(self.cls_score)+'\n'+"Must "+str(self.cls_must)+'\n'+"Stor "+str(self.cls_storage))
+            file.close()
         else:
             print("您不是教务或者未登录")
             return False
@@ -211,6 +209,7 @@ class System:
 system=System()
 system.Login()
 system.Set()
+system.Create_cls()
 '''
 EA=Educational_administrator.E_A("EA","123")
 Student=SandT.Student()
