@@ -314,7 +314,7 @@ class System:
         System.UserType=''
         print("已登出")
     def Check_cls(self): #EA,Student
-        if System.UserType=="EA" or System.UserType=="Student":
+        if System.UserType=="EA" or System.UserType=="Stu":
             file=open('Classes available',mode="r")
             temp=file.readlines()
             temp2=[]
@@ -336,10 +336,33 @@ class System:
         else:
             print("请先登录")
             return False
+    def check_if_student_score_is_enough(self):
+        file=open('Student_choosed_cls',mode='r')
+        temp=file.readlines()
+        temp2=[]
+        for items in temp:
+            if items[:items.find(" "):]==System.UserName:
+                temp2.append(items[items.find(" ")+1::].rstrip())
+        file.close()
+        file=open('Classes available',mode="r")
+        temp=file.readlines()
+        student_score=0
+        for items in temp:
+            if items[:4:]=='Name' and items[5::].rstrip() in temp2:
+                student_score+=int(temp[temp.index(items)+2][5::].rstrip())
+        file.close()
+        file=open('Student_score_needed',mode="r")
+        student_need_score=int(file.readline().rstrip())
+        if student_score<student_need_score:
+            print("系统提示您,您的学分还未达到要求，请继续进行选课")
+        file.close()
+
 try:
     system=System()
+    Pop=True
     while 1:
-        a=input("选择你要进行的操作(输入数字序号),第一步请先登录\n"
+        if Pop==True:
+            print("选择你要进行的操作(输入数字序号),第一步请先登录,若已登录请忽略\n"
                 "1.查看学分要求(学生)\n"
                 "2.选课(学生)\n"
                 "3.退课(学生)\n"
@@ -352,7 +375,11 @@ try:
                 "10.登录\n"
                 "11.登出\n"
                 "12.查看课程信息(学生+教务)\n"
-                "13.退出程序")
+                "13.退出程序\n"
+                "若想要关闭提示请输入TD")
+        a=input()
+        if a=='TD':
+            Pop=False
         if a=='1':
             system.Check_score()
         if a=="2":
@@ -379,6 +406,8 @@ try:
             system.Check_cls()
         if a=="13":
             break
+        if system.UserType=="Stu":
+            system.check_if_student_score_is_enough()
 except BaseException:
     Error=Exception('傻子用户又乱搞')
     raise Error
