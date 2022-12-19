@@ -1,4 +1,4 @@
-import math
+import Maaath
 class Point:
     def __init__(self):
         self.x = [9,10]
