@@ -1,5 +1,17 @@
 import pygame
 import sys  # sys 是 python 的标准库，提供 Python 运行时环境变量的操控
+import random
+# settings
+FPS = 60
+TITLE = 'Chrome Dino'
+BACKGROUND_COLOR = (235, 235, 235)
+SCREENSIZE = (700, 300)
+IMAGE_PATHS = {
+    'ground': 'C:/Users/17354/Desktop/ground.png',
+    'cloud': 'C:/Users/17354/Desktop/cloud.png',
+}
+ground_image=pygame.image.load(IMAGE_PATHS['ground'])
+cloud_image=pygame.image.load(IMAGE_PATHS['cloud'])
 class Dinosaur:
     def __init__(self):
         pass
@@ -37,20 +49,53 @@ class Ptera(obstacle):
 class Scene:
     def __init__(self):
         pass
-class Ground(Scene):
-    def __init__(self):
-        super(Ground, self).__init__()
-    def draw(self,pos):
-        pass
+class Ground(pygame.sprite.Sprite):
+    def __init__(self, image, position):
+        pygame.sprite.Sprite.__init__(self)
+
+        # two same pictures
+        self.image_0 = image
+        self.rect_0 = self.image_0.get_rect()
+        self.rect_0.left, self.rect_0.bottom = position
+
+        self.image_1 = image
+        self.rect_1 = self.image_1.get_rect()
+        self.rect_1.left, self.rect_1.bottom = self.rect_0.right, self.rect_0.bottom
+
+        # pixels move each term
+        self.speed = -10
+
+    # calculate position
     def update(self):
-        pass
-class Cloud(Scene):
-    def __init__(self):
-        super(Cloud, self).__init__()
+        self.rect_0.left += self.speed
+        self.rect_1.left += self.speed
+        if self.rect_0.right < 0:
+            self.rect_0.left = self.rect_1.right
+            self.rect_0, self.rect_1 = self.rect_1, self.rect_0
+
+    # draw to screen
+    def draw(self, screen):
+        screen.blit(self.image_0, self.rect_0)
+        screen.blit(self.image_1, self.rect_1)
+class Cloud(pygame.sprite.Sprite):#pygame.sprite.Sprite is the base for any visible elements
+    def __init__(self, image):
+        pygame.sprite.Sprite.__init__(self)
+
+        # two same pictures
+        self.image = image
+        self.rect = self.image.get_rect()
+        print(self.rect)
+        self.rect.right=700
+        # pixels move each term
+        self.speed = -10
     def draw(self,pos):
-        pass
+        screen.blit(self.image, self.rect)
     def update(self):
-        pass
+        self.rect.right += self.speed
+        if self.rect.right < 0:
+            self.rect.right=700
+            self.rect.y=random.randint(20,90)
+            self.speed=random.randint(-15,-5)
 class Scoreboard(Scene):
     def __init__(self):
         super(Scoreboard, self).__init__()
@@ -58,28 +103,24 @@ class Scoreboard(Scene):
         pass
     def draw(self,score):
         pass
+
 # 内部各功能模块进行初始化创建及变量设置，默认调用
 pygame.init()
+screen = pygame.display.set_mode(SCREENSIZE)
+pygame.display.set_caption(TITLE)
 
-# 设置游戏窗口大小，分别是宽度和高度
-size = width, height = 800, 600
-
-# 初始化显示窗口
-screen = pygame.display.set_mode(size)
-
-# 设置显示窗口的标题内容，str 类型
-pygame.display.set_caption('DinoGame')
-
-# 无限循环，直到 Python 运行时退出结束
+clock = pygame.time.Clock()
+ground=Ground(ground_image,(0,SCREENSIZE[1]))
+cloud=Cloud(cloud_image)
 while True:
-
-    # 从 Pygame 的事件队列中取出事件，并从队列中删除该事件
     for event in pygame.event.get():
-
-        # 获得事件类型，并逐类响应
         if event.type == pygame.QUIT:
-            # 用于退出结束游戏并退出
+            pygame.quit()
             sys.exit()
-
-    # 对显示窗口进行更新，默认窗口全部重绘
+    screen.fill(BACKGROUND_COLOR)
+    cloud.draw(screen)
+    cloud.update()
+    ground.draw(screen)
+    ground.update()
     pygame.display.update()
+    clock.tick(FPS)
