@@ -1,2 +1,1 @@
-a='Name SS'
-print(a[5::],'asdasdas',sep="")
+print((299%1000)//100)
