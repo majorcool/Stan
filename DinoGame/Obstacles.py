@@ -27,7 +27,7 @@ class Ptera(pygame.sprite.Sprite):
             if change == 1:
                 self.rect_1.bottom = 475
             else:
-                self.rect_1.bottom = 575
+                self.rect_1.bottom = 505
         if self.ref_counter==10:#调节翅膀煽动频率
             self.ref_counter=0
             self.refresh()
