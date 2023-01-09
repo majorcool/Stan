@@ -29,8 +29,9 @@ class Dino(pygame.sprite.Sprite):
         self.d_limit=301
         self.music_played=False
         self.d_count=0
+        self.ducked=False
     def duck(self):
-        self.dino_stat='duck'
+        self.ducked=True
         if self.d_count%5==0:
             if self.image!=self.images[4] and self.image!=self.images[5]:
                 self.image=self.images[4]
@@ -41,7 +42,8 @@ class Dino(pygame.sprite.Sprite):
         self.d_count+=1
     def jump(self):
         if self.jumped==False and self.dino_stat=='jump' or self.status=="Start_Animation":
-            self.image=self.images[3]
+            if self.ducked==False:
+                self.image=self.images[3]
             if self.jump_count<=self.c_limit:
                 self.rect.bottom-=self.jump_spd
             elif self.jump_count<=self.d_limit:
@@ -60,7 +62,7 @@ class Dino(pygame.sprite.Sprite):
         self.refresh_count+=1
         if self.rect.bottom==590:
             self.jumped=False
-        if self.dino_stat=='run':
+        if self.dino_stat=='run' and self.ducked==False:
             if self.refresh_count%5==0:
                 if self.image==self.images[1]:
                     self.image=self.images[2]
@@ -78,6 +80,8 @@ class Dino(pygame.sprite.Sprite):
                 self.music_played=True
         if KeyInput[pygame.K_DOWN]:
             self.duck()
+        else:
+            self.ducked=False
 
 
     def draw(self,screen):
