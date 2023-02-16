@@ -1,5 +1,0 @@
-file=open('python读写案例.txt',mode='r+')
-file.seek(2)
-file.write("1222")
-print(file.read())
-file.close()

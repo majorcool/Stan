@@ -1,6 +1,0 @@
-file=open('1.txt',mode="r")
-file_new=open('1-new.txt',mode="w+")
-a=file.read()
-file_new.write(a)
-file.close()
-file_new.close()
